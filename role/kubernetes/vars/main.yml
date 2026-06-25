@@ -1,0 +1,15 @@
+# Set variables.
+system:
+  user: vagrant
+  group: vagrant
+  yum:
+    conf_dir: /etc/yum.repos.d
+kubernetes:
+  organization: sloopstash
+  environment: stg
+  stack: container
+  release_version: 1.28
+  conf_dir: /etc/kubernetes
+  cni:
+    flannel:
+      template_url: https://raw.githubusercontent.com/sloopstash/kickstart-kubernetes/master/cni/flannel/main.yml

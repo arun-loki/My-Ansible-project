@@ -1,0 +1,63 @@
+# Load Linux kernel modules.
+- name: Load Linux kernel modules
+  ansible.builtin.template:
+    src: kernel/module.conf.j2
+    dest: "{{kernel_module_conf_path}}"
+    owner: root
+    group: root
+    mode: 0600
+    backup: false
+  vars:
+    organization: "{{system.organization}}"
+    kernel_module_conf_path: "/etc/modules-load.d/{{organization}}.conf"
+  tags:
+    - configure
+
+# Set Linux kernel params.
+- name: Set Linux kernel params
+  ansible.builtin.template:
+    src: kernel/param.conf.j2
+    dest: "{{kernel_conf_path}}"
+    owner: root
+    group: root
+    mode: 0600
+    backup: false
+  vars:
+    organization: "{{system.organization}}"
+    kernel_params: "{{system.kernel.param}}"
+    kernel_conf_path: "/etc/sysctl.d/90-{{organization}}.conf"
+  notify:
+    - Apply Linux kernel params
+  tags:
+    - configure
+
+# Set Linux security limit params.
+- name: Set Linux security limit params
+  ansible.builtin.template:
+    src: security-limit.conf.j2
+    dest: "{{security_limit_conf_path}}"
+    owner: root
+    group: root
+    mode: 0600
+    backup: false
+  vars:
+    organization: "{{system.organization}}"
+    system_user: "{{system.user}}"
+    security_limit_params: "{{system.security_limit.param}}"
+    security_limit_conf_path: "/etc/security/limits.d/10-{{organization}}.conf"
+  tags:
+    - configure
+
+# Configure Supervisor.
+- name: Configure Supervisor
+  ansible.builtin.template:
+    src: supervisor/server.conf.j2
+    dest: "{{supervisor_conf_path}}"
+    owner: root
+    group: root
+    mode: 0600
+    backup: false
+  vars:
+    supervisor_conf_path: "{{system.supervisor.conf_path}}"
+  tags:
+    - configure

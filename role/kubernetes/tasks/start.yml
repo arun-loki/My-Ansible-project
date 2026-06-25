@@ -1,0 +1,7 @@
+# Start Kubelet.
+- name: Start Kubelet
+  ansible.builtin.systemd:
+    name: kubelet.service
+    state: started
+  tags:
+    - start
