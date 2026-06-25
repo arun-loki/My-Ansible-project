@@ -1,0 +1,7 @@
+secret/*.pem
+secret/*.pub
+secret/*.yml
+secret/ssh/node*
+*.log
+*.retry
+tmp/*
