@@ -1,9 +1,0 @@
-- hosts: docker_manager
-  roles:
-    - system
-    - docker
-
-- hosts: docker_worker
-  roles:
-    - system
-    - docker
