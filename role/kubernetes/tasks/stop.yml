@@ -1,7 +1,0 @@
-# Stop Kubelet.
-- name: Stop Kubelet
-  ansible.builtin.systemd:
-    name: kubelet.service
-    state: stopped
-  tags:
-    - stop

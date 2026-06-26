@@ -1,7 +1,0 @@
-# Restart Docker CRI.
-- name: Restart Docker CRI
-  ansible.builtin.systemd:
-    name: cri-docker.service
-    state: restarted
-  tags:
-    - configure
